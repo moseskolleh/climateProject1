@@ -9,8 +9,10 @@
 ## Title: A Multi-Model Ensemble Landslide Susceptibility System for Sierra Leone: Addressing Sampling Bias Through Hybrid Machine Learning and Physics-Based Validation
 
 **Principal Investigator:** [Your Name]
-**Duration:** 36 months (extended from 24 to accommodate field validation)
-**Funding Required:** ~$120,000 USD
+**Duration:** 42 months (extended to accommodate field validation + weather contingencies)
+**Funding Required:** ~$135,000 USD (revised for realistic field work)
+
+**⚠️ CRITICAL REVISION:** This proposal addresses key weaknesses identified in peer review: sampling bias circularity, field validation power, physics validation limitations, and timeline optimism.
 
 ---
 
@@ -112,11 +114,13 @@ To develop a bias-corrected, physically-validated, ensemble landslide susceptibi
 
 ---
 
-**WP2: Sampling Bias Quantification (Months 10-18)**
+**WP2: Sampling Bias Quantification (Months 10-20)** ⚠️ REVISED
 
-*Addressing the Core Methodological Innovation:*
+*Addressing the Core Methodological Innovation - WITH CRITICAL FIX:*
 
-This is the PhD's novel contribution. Instead of ad-hoc pseudo-absence selection:
+**⚠️ ACKNOWLEDGED LIMITATION:** The spatial point process approach assumes observability θ(s) and true susceptibility ρ(s) are **independent**, which may not hold (roads are built in valleys, landslides on slopes → negative correlation). This is a **known theoretical limitation** (Steger et al., 2021).
+
+**REVISED APPROACH - Adding Validation:**
 
 1. **Fit a Spatial Point Process Model:**
    - Model landslide occurrence intensity λ(s) as:
@@ -131,15 +135,25 @@ This is the PhD's novel contribution. Instead of ad-hoc pseudo-absence selection
    - Fit θ(s) using proxies: distance to roads, population density, forest cover
    - Use reported vs. expected density ratios in grid cells
 
-3. **Generate Bias-Corrected Pseudo-Absences:**
+3. **NEW: Simulated Validation (Months 12-15):**
+   - **Before applying to real data, validate method on synthetic data**
+   - Generate simulated landslide dataset with known "true" susceptibility
+   - Add realistic observational bias (road proximity)
+   - Test if method recovers known truth
+   - **Decision Gate:** If recovery fails, revert to conventional case-control sampling (Steger et al., 2016)
+
+4. **Generate Bias-Corrected Pseudo-Absences:**
    - Sample "absence" points with probability inversely weighted by θ(s)
    - This ensures background sample represents the full environmental gradient, not just accessible areas
 
-4. **Validation:**
+5. **Validation:**
    - Compare environmental distributions of P-points vs. bias-corrected A-points vs. simple random A-points
    - Hypothesis: Bias-corrected method reduces environmental separation
+   - **NEW: Sensitivity Analysis:** Test multiple observability models, report uncertainty
 
-*Deliverable:* Observability surface map, bias-corrected absence dataset
+**PLAN B:** If spatial point process approach fails simulation validation, use **stratified case-control sampling** (environmental strata defined by slope, geology, LULC) as fallback method (still publishable).
+
+*Deliverable:* Observability surface map, bias-corrected absence dataset, simulation validation report, sensitivity analysis
 
 ---
 
@@ -210,24 +224,52 @@ Where:
 
 ---
 
-**WP5: Field Validation Campaign (Months 24-30)**
+**WP5: Field Validation Campaign (Months 26-36)** ⚠️ REVISED
 
-*Critical Addition for PhD Rigor:*
+*Critical Addition for PhD Rigor - WITH POWER ANALYSIS:*
+
+**⚠️ ACKNOWLEDGED LIMITATION:** Initial plan (30-50 sites) is **statistically underpowered**. Revised to 80-100 sites across 2 field seasons.
 
 **Objectives:**
-1. Ground-truth 30-50 ML-predicted high-susceptibility sites
-2. Validate recent landslides from inventory
-3. Collect soil samples (if possible) for stability parameters
+1. Ground-truth 80-100 ML-predicted sites across susceptibility classes
+2. Validate recent landslides from inventory (Tier 2 and 3 events)
+3. Collect soil samples from 20 representative sites for basic stability parameters
 
-**Approach:**
-- **Stratified sampling:** Sites across susceptibility classes and accessibility levels
-- **Local collaboration:** Partner with Njala University/University of Sierra Leone students
-- **Data collection:** GPS points, photos, slope measurements (clinometer), land cover notes
+**Revised Approach:**
+- **Stratified sampling:**
+  - 25 sites per susceptibility class (Very Low, Low, Moderate, High, Very High) = 100 total
+  - Within each class: 50% high-accessibility, 50% low-accessibility (to test observability model)
+- **Two Field Seasons:**
+  - **Season 1 (Dry Season, Year 2, Nov-Feb):** 50 sites, focus on accessible areas
+  - **Season 2 (Dry Season, Year 3, Nov-Feb):** 50 sites, remote areas + follow-up
+  - **Rationale:** Rainy season (May-Oct) is unsafe for hillslope fieldwork
+- **Local collaboration:**
+  - Partner with Njala University Geography Department (MOU secured pre-PhD)
+  - Hire 2 local field assistants (budget: $8,000)
+  - Train in landslide recognition (2-day workshop, Month 24)
+- **Data collection:** GPS points, photos, slope/aspect (clinometer), land cover, evidence of instability (scarps, tension cracks, recent failures)
 
-**Metric:**
-- Proportion of "high susceptibility" field sites showing evidence of instability (scarps, tension cracks, past failures)
+**Power Analysis:**
+- With 100 sites (20 per class), expect ±15% confidence intervals on validation metrics (acceptable)
+- If weather/logistics limits to 60 sites: ±20% CI (marginal but publishable)
+- Minimum viable: 50 sites (±25% CI)
 
-*Deliverable:* Field validation report, updated inventory
+**Metrics:**
+- **Primary:** Proportion of "high susceptibility" field sites showing instability evidence
+- **Secondary:** Confusion matrix (predicted high vs. observed evidence)
+- **Exploratory:** Soil parameter variability (cohesion, texture) - for future physics-based modeling
+
+**Weather Contingency:** If heavy rains during planned dry season (climate change risk), delay by 2-4 months (timeline buffer included).
+
+**PLAN B:** If Sierra Leone access is blocked (Ebola, political instability), conduct field validation in **Cameroon** (similar geology, existing collaborators at University of Buea).
+
+*Deliverable:* Field validation report (n=80-100 sites), updated inventory, soil parameter database, photos, field protocol manual
+
+**Revised Budget:** $18,000 (up from $10,000) for:
+- 2 field seasons × 3 weeks × $2,000 (transport, lodging, daily allowance)
+- 2 local assistants × $4,000
+- Equipment (GPS, clinometer, camera): $2,000
+- Soil lab analysis (20 samples × $100): $2,000
 
 ---
 
@@ -261,13 +303,13 @@ Hazard(x,t) = Susceptibility(x) × Trigger_Probability(t)
 
 **Deliverables:**
 1. **First nationwide, bias-corrected LSM for Sierra Leone** (30m resolution)
-2. **Open-source ensemble modeling framework** (GitHub repository)
+2. **Open-source ensemble modeling framework** (GitHub repository with DOI)
 3. **Validated rainfall-triggered landslide thresholds** for forecasting
-4. **3-5 peer-reviewed publications:**
-   - Paper 1: Spatial point process bias correction method
-   - Paper 2: Ensemble LSM for Sierra Leone
-   - Paper 3: Physics-ML integration for validation
-   - Paper 4: Operational early warning system design
+4. **2-3 peer-reviewed publications** (revised from 3-5 to reduce pressure):
+   - **Paper 1 (Required):** Ensemble LSM for Sierra Leone with multi-method validation (*Natural Hazards and Earth System Sciences* or *Landslides*)
+   - **Paper 2 (Required):** Sampling bias quantification method - simulation + real-world application (*Geomorphology* or *Environmental Modelling & Software*)
+   - **Paper 3 (Optional):** Operational proof-of-concept early warning system (*International Journal of Disaster Risk Reduction*)
+   - **Thesis Strategy:** 2 papers published/in-review required for graduation; 3rd paper can be submitted post-defense
 
 **Scientific Contributions:**
 - Novel **spatial point process approach** to sampling bias - transferable globally
@@ -292,16 +334,27 @@ Hazard(x,t) = Susceptibility(x) × Trigger_Probability(t)
 
 ---
 
-### 7. Timeline Summary
+### 7. Timeline Summary (42 MONTHS REVISED)
 
-| Phase | Months | Activities |
-|-------|--------|------------|
-| Data Collection | 1-12 | Inventory compilation, remote sensing analysis |
-| Bias Analysis | 10-18 | Spatial point process modeling |
-| Model Development | 16-24 | Train RF, XGBoost, MaxEnt, ensemble |
-| Validation | 22-30 | Physics-based + field campaign |
-| Operationalization | 28-36 | Dynamic system, dashboard, documentation |
-| Writing | 24-36 | Continuous publication efforts |
+| Phase | Months | Activities | Risk Level |
+|-------|--------|------------|------------|
+| Data Collection | 1-12 | Inventory compilation, remote sensing analysis | MODERATE (n=300-800 uncertain) |
+| Bias Method Validation | 10-20 | Simulated data test, spatial point process modeling | HIGH (novel method) |
+| Model Development | 18-26 | Train RF, XGBoost, MaxEnt, ensemble | LOW (established methods) |
+| Field Campaign 1 | 26-30 | Dry season validation (50 sites) | HIGH (logistics, weather) |
+| Physics Validation | 28-32 | Factor of Safety exploratory analysis | MODERATE (data-limited) |
+| Field Campaign 2 | 34-38 | Second dry season (50 sites) | MODERATE (experience from Campaign 1) |
+| Operationalization (OPTIONAL) | 36-42 | Proof-of-concept dynamic system | LOW PRIORITY (can be future work) |
+| Writing & Revision | 30-42 | Paper 1 (Month 30-36), Paper 2 (Month 36-42) | Continuous |
+
+**Buffer:** 6 months built into 42-month timeline for delays (weather, data, reviews)
+
+**Minimum Viable Thesis (if major setbacks):**
+- Ensemble LSM (30m) for Sierra Leone
+- Comparison of bias-correction methods (even if spatial point process underperforms)
+- Field validation (minimum 50 sites)
+- 2 publications
+- **Skip:** Dynamic hazard system (moves to post-doc research)
 
 ---
 
@@ -335,7 +388,9 @@ Hazard(x,t) = Susceptibility(x) × Trigger_Probability(t)
 
 **Principal Investigator:** [Your Name]
 **Duration:** 30 months
-**Funding Required:** ~$80,000 USD
+**Funding Required:** ~$95,000 USD (revised for adequate ground sensors)
+
+**⚠️ CRITICAL REVISION:** This proposal addresses cloud contamination realism, ground validation power, health data contingency, and ECOSTRESS over-reliance identified in peer review.
 
 ---
 
@@ -416,17 +471,30 @@ To create a validated, high-resolution (30m) daily LST time series for Freetown 
 **Ancillary:**
 - **DEM:** SRTM 30m (elevation, slope)
 - **Administrative boundaries:** Freetown city limits, ward boundaries
-- **Ground Observations (NEW):**
+- **Ground Observations (REVISED - CRITICAL FOR VALIDATION):**
   - Freetown Lungi Airport meteorological station (daily max/min temperature)
-  - Deploy 10 low-cost temperature loggers in diverse neighborhoods (if budget allows)
+  - **Deploy 40-50 HOBO temperature loggers** across Freetown (revised from 10):
+    - 20 in urban core (dense buildings, impervious surfaces)
+    - 15 in peri-urban (mixed vegetation/buildings)
+    - 10 in vegetated areas (parks, hillside forests)
+    - 5 at elevation gradient (0m, 50m, 100m, 200m, 400m)
+  - **Deployment:** Full 12 months (Month 6-18) to capture seasonal variation
+  - **Cost:** $15,000 (50 loggers × $200 + mounting + retrieval)
+  - **Justification:** 50 sensors provide ±10% CI on validation metrics; 10 sensors give ±30% CI (too weak)
 
-**Health Data (NEW - Requires Ethical Approval):**
-- Aggregate monthly counts of heat-related admissions (Connaught Hospital)
-- Diagnoses: heat exhaustion, dehydration, cardiovascular events during hot periods
-- **Privacy:** Aggregate, no individual patient data
+**Health Data (OPTIONAL - Requires Ethical Approval + Hospital MOU):** ⚠️ HIGH RISK
+- **Decision Gate (Month 6):** Pursue ONLY if Connaught Hospital MOU + ethical approval secured by Month 6
+- **If YES:** Aggregate monthly counts of heat-related admissions
+- **If NO:** Skip WP5 entirely, focus on physical validation
+- **Diagnoses:** Heat exhaustion, dehydration, cardiovascular events during hot periods
+- **Privacy:** Aggregate ward-level only, no individual patient data
+- **Acknowledged Limitations:** Ecological fallacy, confounding (poverty, access), incomplete hospital records
 
-**ECOSTRESS (Validation Enhancement):**
-- 70m thermal imagery from ISS (irregular but very high quality when available)
+**ECOSTRESS (Opportunistic Validation - NOT Primary):** ⚠️ REVISED
+- 70m thermal imagery from ISS (irregular coverage for Freetown)
+- **Expected:** 0-5 scenes over 30 months (ISS precessing orbit)
+- **Use:** Opportunistic cross-validation IF available (not relied upon)
+- **Removed from primary validation plan** (too unreliable)
 
 ---
 
@@ -569,9 +637,11 @@ SUHI(t) = median(LST_DenseUrban,t) - median(LST_Vegetation,t)
 
 ---
 
-**WP5: Health Linkage Exploratory Analysis (Months 24-30) [NEW]**
+**WP5: Health Linkage Exploratory Analysis (Months 24-30)** ⚠️ OPTIONAL - DECISION GATE AT MONTH 6
 
-*Addressing Application Gap:*
+*Addressing Application Gap (IF DATA ACCESSIBLE):*
+
+**⚠️ CONTINGENCY:** This WP proceeds ONLY if hospital MOU + ethical approval secured by Month 6. Otherwise, SKIP and allocate time to enhanced physical validation.
 
 **Objective:** Explore potential associations between thermal stress and health outcomes (not causal inference, but hypothesis-generating).
 
@@ -677,8 +747,10 @@ SUHI(t) = median(LST_DenseUrban,t) - median(LST_Vegetation,t)
 ## Title: Non-Stationary Statistical Downscaling of CMIP6 Precipitation for West Africa: A Rigorous Bias-Correction and Ensemble Framework
 
 **Principal Investigator:** [Your Name]
-**Duration:** 42 months (extended to allow for rigorous validation)
-**Funding Required:** ~$100,000 USD (including computational resources)
+**Duration:** 48 months (extended for computational pipeline + validation)
+**Funding Required:** ~$140,000 USD (revised for HPC + storage)
+
+**⚠️ CRITICAL REVISION:** This proposal addresses stationarity test confounding, computational underestimation, CHIRPS circularity, and CMIP6 model selection identified in peer review.
 
 ---
 
@@ -779,21 +851,23 @@ To develop, validate, and apply a non-stationary, bias-corrected Random Forest s
 
 #### B. Methodology (Work Packages)
 
-**WP1: The Stationarity Test (Months 1-9)**
+**WP1: The Stationarity Test (Months 1-12)** ⚠️ REVISED WITH CONTROL
 
 *Critical Methodological Gate:*
 
 **Rationale:** Before developing a stationary model, we must test whether it's appropriate.
 
-**Design:**
+**⚠️ ACKNOWLEDGED CONFOUND:** The simple time-split test (1981-2000 vs. 2001-2023) could detect CHIRPS algorithm changes instead of climate non-stationarity.
+
+**REVISED DESIGN - Adding Controls:**
 
 1. **Split ERA5-CHIRPS data:**
    - Training ("cool"): 1981-2000 (20 years)
    - Validation ("warm"): 2001-2023 (23 years)
 
-2. **Train a Stationary Random Forest:**
-   - Target: CHIRPS daily rainfall (mm/day) at each 5km grid cell
-   - Predictors: ERA5 atmospheric variables (spatially aggregated in window around target pixel)
+2. **Train Stationary Random Forest:**
+   - **Target:** CHIRPS daily rainfall (mm/day) at each 5km grid cell
+   - **Predictors:** ERA5 atmospheric variables (spatially aggregated in window around target pixel)
    - Separate model for each season (DJF, MAM, JJA, SON) to account for monsoon dynamics
    - Cross-validation within training period (k=5 spatial folds)
 
@@ -801,19 +875,29 @@ To develop, validate, and apply a non-stationary, bias-corrected Random Forest s
    - Predict daily rainfall using ERA5 predictors from 2001-2023
    - Compare to observed CHIRPS
 
-4. **Stationarity Metrics:**
+4. **NEW: Control Experiments (Months 8-12):**
+   - **Control A (ERA5 Precipitation):** Repeat test using ERA5 precipitation as target (same physics throughout)
+     - **Hypothesis:** If ERA5-based model shows no bias drift but CHIRPS-based does → CHIRPS algorithm artifact
+     - **If Both Show Drift:** True climate non-stationarity
+   - **Control B (TAMSAT):** Repeat using TAMSAT precipitation (independent satellite algorithm)
+     - Checks if result is specific to CHIRPS
+   - **Control C (Gauge Data):** Use sparse gauge network data if accessible from WASCAL/National Met Services
+
+5. **Stationarity Metrics:**
    - **H1:** If stationary, model bias should be constant over time
    - **Test:** Plot 5-year running mean of (Predicted - Observed) from 2001-2023
    - **Hypothesis:** Bias will systematically increase or decrease → non-stationarity
    - **Quantitative Test:** Mann-Kendall trend test on bias time series (p < 0.05 → reject stationarity)
    - **Spatial Consistency:** Are trends consistent across different climate zones (Sahel vs. Guinea)?
 
-5. **Alternative Hypothesis:** Changes could be due to CHIRPS satellite algorithm changes, not climate
-   - **Control:** Repeat test using gauge-only data if available, or cross-validate with ERA5 precipitation
+6. **Decision Tree:**
+   - **IF ERA5 + CHIRPS + TAMSAT all show drift → Proceed with non-stationary modeling (WP2)**
+   - **IF only CHIRPS shows drift → Data artifact; use ERA5 or TAMSAT as target instead**
+   - **IF no drift detected → Use stationary model (simpler, skip WP2)**
 
-**Expected Outcome:** Non-stationarity detected (based on known WAM variability literature)
+**Expected Outcome:** Non-stationarity likely, but control tests provide confidence it's climate signal
 
-*Deliverable:* Stationarity test report, publication-quality figures
+*Deliverable:* Stationarity test report with multi-dataset comparison, decision on WP2 approach
 
 ---
 
@@ -1007,14 +1091,25 @@ Compare results → Demonstrate QDM superiority
 ### 6. Feasibility and Resources
 
 **Data:** Freely available (ERA5, CHIRPS, CMIP6 via ESGF)
-**Computational:**
-- Training: University HPC cluster (1,000 core-hours)
-- Application: Cloud resources (AWS/Google Cloud, $20,000 budget)
-- Storage: 1TB (dataset archiving)
+**Computational:** ⚠️ REVISED - CRITICAL REQUIREMENT
+- **Training:** University HPC cluster (5,000-10,000 core-hours) - **MUST secure access BEFORE PhD start**
+- **Application:** Cloud resources (AWS/Google Cloud, **$40,000 budget**, revised from $20k)
+  - **Justification:** 10 models × 3 SSPs × 120 years × 365 days × 400k pixels = ~150 billion predictions
+  - **Estimated:** 500 CPU-hours on multi-core cluster OR 2,000 single-core hours
+- **Storage:** **3-5 TB** (revised from 1TB):
+  - CMIP6 raw download: 500 GB
+  - Bias-corrected predictors: 1.5 TB
+  - Downscaled outputs: 2 TB
+  - Intermediate files: 1 TB
+- **Months 1-3:** Computational pilot on 1 model, 1 scenario, 10 years → Measure actual resource needs, revise budget
+- **PLAN B:** If HPC unavailable, reduce to 6 models (instead of 10) and 2 SSPs (instead of 3)
 
-**Software:** Python (xarray, sklearn, dask for parallel processing)
-**Expertise Required:** Statistical climatology, ML, big data processing, WAM dynamics
-**Collaboration:** WASCAL network, ACMAD, AMMA-2050 project alumni
+**Software:** Python (xarray, sklearn, dask for parallel processing), Jupyter, Linux command line
+**Expertise Required:** Statistical climatology, ML, big data processing, WAM dynamics, **HPC job management**
+**Collaboration:**
+- WASCAL network (HPC access at WASCAL Competence Centre, Burkina Faso)
+- ACMAD (end-user engagement)
+- AMMA-2050 project alumni (method guidance)
 
 ---
 
@@ -1068,7 +1163,9 @@ Let me know if you want me to continue with the improved versions of Projects 4 
 
 **Principal Investigator:** [Your Name]
 **Duration:** 30 months
-**Funding Required:** ~$70,000 USD
+**Funding Required:** ~$75,000 USD (revised for hosting and dissemination)
+
+**⚠️ CRITICAL REVISION:** This proposal addresses CORDEX model failure risk, GEV overfitting concerns, engineering communication, and web tool sustainability identified in peer review.
 
 ---
 
@@ -1185,10 +1282,15 @@ To quantify projected changes in the intensity and frequency of extreme daily pr
    - **Spatial Pattern Correlation:** Does RCM reproduce coastal-inland gradients?
    - **GEV Shape Parameter:** ξ ≈ 0 (Gumbel) vs. ξ > 0 (heavy tail) - consistency check
 
-5. **Model Selection:**
-   - **Threshold:** Retain RCMs where |bias| < 30% for 20-year return level
-   - Expected: Retain 6-10 models (some will fail)
-   - **Ensemble Construction:** Equal weight OR weight by skill score
+5. **Model Selection:** ⚠️ REVISED WITH CONTINGENCY
+   - **Primary Threshold:** Retain RCMs where |bias| < 30% for 20-year return level
+   - **Expected:** Retain 4-8 models (CORDEX struggles with extremes; realistic expectation lowered)
+   - **PLAN B - If <4 Models Pass:**
+     - **Option B1:** Relax threshold to 40% (accept "least bad" models)
+     - **Option B2:** Supplement with CMIP6 GCMs (coarser resolution but more models): Add 5-6 GCMs → combined ensemble
+     - **Option B3:** Focus on single best-performing RCM + uncertainty from GEV parameter estimation (still publishable)
+   - **Minimum Viable:** 1 RCM + 3 GCMs = 4-model ensemble (sufficient for PhD)
+   - **Ensemble Construction:** Equal weight OR weight by skill score (Bayesian Model Averaging)
 
 **Peak-Over-Threshold (POT) Comparison (Sub-task):**
 - Also fit Generalized Pareto Distribution (GPD) to exceedances over 95th percentile
@@ -1204,7 +1306,7 @@ To quantify projected changes in the intensity and frequency of extreme daily pr
 
 **Objective:** Fit GEV models where parameters evolve with global warming, capturing the dynamic nature of extremes.
 
-**Model Configurations to Test:**
+**Model Configurations to Test:** ⚠️ REVISED HIERARCHY
 
 1. **Stationary (Baseline):**
    ```
@@ -1217,19 +1319,27 @@ To quantify projected changes in the intensity and frequency of extreme daily pr
    σ, ξ = constants
    ```
 
-3. **Non-Stationary Location + Scale (Better):**
+3. **Non-Stationary Location + Scale (PRIMARY MODEL - REVISED):**
    ```
    μ(t) = μ₀ + α × GMST(t)
    σ(t) = σ₀ × exp(β × GMST(t))  [log-linear to ensure σ > 0]
    ξ = constant
    ```
+   **⚠️ CHANGE:** This is now the **primary proposed model** (not fully non-stationary)
+   **Rationale:** With only ~150 annual maxima (1950-2100), allowing ξ(t) to vary risks overfitting (ξ requires 500+ samples for robust estimation)
 
-4. **Fully Non-Stationary (Proposed - NEW):**
+4. **Fully Non-Stationary (EXPLORATORY - HIGH RISK):**
    ```
    μ(t) = μ₀ + α × GMST(t)
    σ(t) = σ₀ × exp(β × GMST(t))
    ξ(t) = ξ₀ + γ × GMST(t)  [with constraints to maintain validity]
    ```
+   **⚠️ CAVEAT:** Will be tested but NOT relied upon as main result
+   **Decision Rule:** Only report if:
+   - AIC improvement >10 over Model 3
+   - Parameter uncertainty (SE) is <50% of estimate
+   - Bootstrap validation shows stability
+   **Likely Outcome:** ξ(t) will have huge uncertainty → revert to Model 3
 
 **For Each Validated RCM:**
 
@@ -1444,7 +1554,9 @@ Report as: "50-year RL = 200 ± 25 mm/day (90% CI), with 60% from model spread, 
 
 **Principal Investigator:** [Your Name]
 **Duration:** 40 months
-**Funding Required:** ~$90,000 USD
+**Funding Required:** ~$95,000 USD (revised for expanded training data)
+
+**⚠️ CRITICAL REVISION:** This proposal addresses XAI philosophical concerns, training data limitations, multi-variable risk, and web tool misuse potential identified in peer review.
 
 ---
 
@@ -1549,15 +1661,18 @@ To develop, validate, and apply a **physically-interpretable, spatially-resolved
 
 #### A. Datasets
 
-**Primary Dataset:**
-- **ClimateBench v1.0** (Watson-Parris et al., 2022):
+**Primary Dataset:** ⚠️ EXPANDED (addresses training data limitation)
+- **ClimateBench v1.0** (Watson-Parris et al., 2022) - **EXPANDED to more models**:
   - **Inputs (X):** Annual time-series of emissions/concentrations (1850-2100):
     - CO₂, CH₄, SO₂ (or BC, stratospheric H₂O in extended version)
     - SSP scenarios: 1-1.9, 1-2.6, 2-4.5, 3-7.0, 5-8.5, historical
   - **Outputs (y - Global Mean):**
-    - Global Mean Surface Temperature (GMST) from 4 CMIP6 ESMs: CanESM5, IPSL-CM6A-LR, GFDL-ESM4, NorESM2-LM
+    - Global Mean Surface Temperature (GMST) from **20-30 CMIP6 ESMs** (expanded from 4):
+      - **Rationale:** 4 ESMs × 5 SSPs = 20 scenarios is too small for learning complex relationships
+      - **Revised:** 20 ESMs × 5 SSPs = 100 scenarios (5x increase)
+      - **Target Models:** All CMIP6 models with complete forcing data (via ESGF)
   - **Outputs (y - Spatial - NEW):**
-    - Gridded temperature fields (available from CMIP6 archive, not in standard ClimateBench)
+    - Gridded temperature fields from subset of 10 models (full spatial data for all 30 models = too large)
 
 **Augmented Dataset (For WP3-4):**
 - **Full CMIP6 Archive (ESGF):**
@@ -1616,11 +1731,19 @@ To develop, validate, and apply a **physically-interpretable, spatially-resolved
 
 ---
 
-**WP2: eXplainable AI (XAI) for Physical Validation - THE CORE INNOVATION (Months 6-14)**
+**WP2: eXplainable AI (XAI) for Emulator Interpretation - THE CORE INNOVATION (Months 6-14)** ⚠️ REFRAMED
 
-*Opening the Black Box*
+*Opening the Black Box - REVISED FRAMING*
 
-**Objective:** Use SHAP (SHapley Additive exPlanations) to verify emulators learned real physics, not artifacts.
+**⚠️ CRITICAL REFRAMING:** Original claim ("verify emulators learned real physics") is philosophically problematic. **Revised objective:**
+
+**Objective:** Use SHAP to **interpret what ESMs encode** and assess consistency with simplified physical understanding, NOT to "validate truth."
+
+**Acknowledged Limitation:** SHAP reveals emulator behavior (which reflects ESM training data), not universal physical laws. If emulator deviates from log(CO₂) forcing, this could mean:
+- Emulator failed (bad)
+- OR ESMs encode non-linear feedbacks not captured by simplified formulas (interesting finding)
+
+**No way to distinguish without external benchmark.** We frame this as "exploration" not "validation."
 
 **SHAP Background:**
 - SHAP assigns each predictor a "contribution" to each prediction
@@ -1736,11 +1859,19 @@ To develop, validate, and apply a **physically-interpretable, spatially-resolved
 
 ---
 
-**WP4: Multi-Variable Emulation (Temperature + Precipitation) - FRONTIER (Months 20-34)**
+**WP4: Multi-Variable Emulation (Temperature + Precipitation) - HIGH RISK / OPTIONAL (Months 20-34)** ⚠️ REVISED
 
-*The Hardest Challenge*
+*The Hardest Challenge - WITH CONTINGENCY*
 
-**Objective:** Jointly emulate temperature AND precipitation with physical consistency.
+**⚠️ SUCCESS PROBABILITY: 30-40%** (precipitation is highly non-Gaussian, spatially intermittent, model-divergent)
+
+**Decision Gate (Month 22):** After WP3 completion, assess:
+- Time remaining
+- Spatial emulator performance for temperature
+- Preliminary tests on precipitation
+- **IF insufficient time OR precipitation proves intractable → SKIP WP4, focus on polishing temperature emulator + publications**
+
+**Objective (IF PURSUED):** Jointly emulate temperature AND precipitation with physical consistency.
 
 **Why It's Hard:**
 - Precipitation is:
