@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>West Africa Climate Risk Research Agenda</title>
+<meta name="description" content="Five PhD research proposals that turn climate science into decisions for West African cities — warnings, design standards, forecasts and plans.">
+<style>
+  :root {
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --accent: #2a78d6;
+    --accent-soft: #cde2fb;
+    --tag-new: #008300;
+    --tag-evolved: #4a3aa7;
+    --tag-flagship: #eb6834;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --page: #0d0d0d;
+      --surface: #1a1a19;
+      --ink: #ffffff;
+      --ink-2: #c3c2b7;
+      --muted: #898781;
+      --grid: #2c2c2a;
+      --baseline: #383835;
+      --border: rgba(255,255,255,0.10);
+      --accent: #3987e5;
+      --accent-soft: #184f95;
+      --tag-new: #35b435;
+      --tag-evolved: #9085e9;
+      --tag-flagship: #eb8a5f;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--page);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--page);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap { display: flex; align-items: center; gap: 18px; height: 52px; overflow-x: auto; }
+  nav .brand { font-weight: 700; font-size: 14px; white-space: nowrap; color: var(--ink); }
+  nav a.item { font-size: 13.5px; color: var(--ink-2); white-space: nowrap; }
+  nav a.item:hover { color: var(--accent); text-decoration: none; }
+  nav a.gh { margin-left: auto; font-size: 13.5px; white-space: nowrap; }
+
+  /* Hero */
+  header.hero { padding: 64px 0 40px; }
+  .kicker {
+    display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+  }
+  h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.12; letter-spacing: -0.02em; max-width: 21ch; }
+  .lede { margin-top: 18px; font-size: 18px; color: var(--ink-2); max-width: 60ch; }
+
+  /* Stat tiles */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 36px 0 8px; }
+  .tile {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .tile .v { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; }
+  .tile .l { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* Sections */
+  section { padding: 44px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  h2 { font-size: 26px; letter-spacing: -0.015em; margin-bottom: 8px; }
+  .sub { color: var(--ink-2); max-width: 62ch; margin-bottom: 26px; }
+  h3 { font-size: 18px; }
+
+  /* Horizon cards */
+  .horizons { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+  .horizon {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px;
+  }
+  .horizon .h { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .horizon p { font-size: 14px; color: var(--ink-2); }
+  .horizon p b { color: var(--ink); }
+
+  /* Project cards */
+  .project {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 26px 26px 22px; margin-bottom: 18px;
+  }
+  .project .top { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .pnum { font-size: 13px; font-weight: 700; color: var(--muted); }
+  .tag {
+    font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 99px; border: 1px solid currentColor;
+  }
+  .tag.flagship { color: var(--tag-flagship); }
+  .tag.evolved { color: var(--tag-evolved); }
+  .tag.new { color: var(--tag-new); }
+  .project h3 { font-size: 21px; margin: 8px 0 4px; letter-spacing: -0.01em; }
+  .project .pitch { color: var(--ink-2); font-size: 15.5px; max-width: 68ch; }
+  .meta { display: flex; gap: 22px; flex-wrap: wrap; margin: 16px 0 14px; padding: 12px 0; border-top: 1px solid var(--grid); border-bottom: 1px solid var(--grid); }
+  .meta div { font-size: 13.5px; color: var(--ink-2); }
+  .meta b { display: block; color: var(--ink); font-size: 14.5px; }
+  .project ul { margin: 10px 0 14px 18px; font-size: 14.5px; color: var(--ink-2); }
+  .project ul li { margin-bottom: 5px; }
+  .project ul li b { color: var(--ink); font-weight: 600; }
+  .plink { font-size: 14px; font-weight: 600; }
+
+  /* Chart */
+  .viz-root {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 22px 24px 18px; position: relative;
+  }
+  .viz-root .ct { font-size: 15px; font-weight: 650; }
+  .viz-root .cs { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  .row { display: grid; grid-template-columns: minmax(120px, 200px) 1fr 52px; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .row .lab { font-size: 13.5px; color: var(--ink-2); text-align: right; line-height: 1.25; }
+  .track { position: relative; height: 20px; }
+  .track::before { content: ""; position: absolute; left: 0; top: -5px; bottom: -5px; width: 1px; background: var(--baseline); }
+  .bar {
+    height: 20px; background: var(--accent);
+    border-radius: 0 4px 4px 0;
+    width: 0; transition: width .7s cubic-bezier(.2,.7,.3,1);
+    cursor: default;
+  }
+  .bar:hover { filter: brightness(1.12); }
+  .row .val { font-size: 13.5px; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+  .tooltip {
+    position: absolute; pointer-events: none; z-index: 5;
+    background: var(--ink); color: var(--page);
+    font-size: 12.5px; padding: 6px 10px; border-radius: 6px;
+    opacity: 0; transform: translate(-50%, -110%); white-space: nowrap; transition: opacity .12s;
+  }
+  .viz-note { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; margin-top: 18px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+  th { font-size: 12.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  tr:last-child td { border-bottom: none; }
+  td.num { font-variant-numeric: tabular-nums; }
+
+  /* Changes */
+  .changes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+  .change { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+  .change .h { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .change p { font-size: 13.5px; color: var(--ink-2); }
+  .change p b { color: var(--ink); }
+
+  /* Funding chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 13px; color: var(--ink-2); background: var(--surface);
+    border: 1px solid var(--border); border-radius: 99px; padding: 5px 13px;
+  }
+
+  footer { border-top: 1px solid var(--border); padding: 30px 0 48px; font-size: 13.5px; color: var(--muted); }
+  footer .wrap { display: flex; gap: 18px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">WA Climate Risk Agenda</span>
+    <a class="item" href="#portfolio">Portfolio</a>
+    <a class="item" href="#projects">Projects</a>
+    <a class="item" href="#glance">At a glance</a>
+    <a class="item" href="#rethink">The rethink</a>
+    <a class="item" href="#funding">Funding</a>
+    <a class="gh" href="https://github.com/moseskolleh/climateproject1">GitHub ↗</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">PhD research portfolio · 2026 redesign</span>
+    <h1>Climate science that changes decisions in West Africa</h1>
+    <p class="lede">Five research proposals built around one test — <em>does this change a decision?</em> Early warnings for landslides and dangerous heat, climate-proof engineering standards, AI forecast skill for the monsoon, and compound flood risk for the region's fastest-growing coastal cities.</p>
+    <div class="tiles">
+      <div class="tile"><div class="v">5</div><div class="l">research projects</div></div>
+      <div class="tile"><div class="v">$515k</div><div class="l">total requested budget</div></div>
+      <div class="tile"><div class="v">30–42</div><div class="l">months per project</div></div>
+      <div class="tile"><div class="v">3 cities</div><div class="l">Freetown · Lagos · Accra, plus the monsoon region</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="portfolio">
+  <div class="wrap">
+    <h2>One portfolio, four decision horizons</h2>
+    <p class="sub">Each project answers a question someone in West Africa is actually asking, and the projects share data, methods and partners rather than competing.</p>
+    <div class="horizons">
+      <div class="horizon"><div class="h">Decades — build it right</div><p><b>Design standards</b> (Project 1) and <b>compound flood planning</b> (Project 5) inform what gets built and where.</p></div>
+      <div class="horizon"><div class="h">Days — warn people</div><p><b>Landslide warnings</b> (Project 2) and <b>heat-health alerts</b> (Project 4) give agencies time to act.</p></div>
+      <div class="horizon"><div class="h">The forecast engine</div><p><b>AI weather-model skill</b> (Project 3) underpins every warning system in the portfolio.</p></div>
+      <div class="horizon"><div class="h">Shared foundations</div><p>Common extreme-rainfall catalogues, the same national partners, and open FAIR outputs across all five.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>The projects</h2>
+    <p class="sub">Every proposal defines decision gates, fallback plans and a minimum viable thesis — full documents are in the repository.</p>
+
+    <article class="project">
+      <div class="top"><span class="pnum">PROJECT 1</span><span class="tag flagship">Flagship</span></div>
+      <h3>Climate-Proof Rainfall Design Standards for Coastal Cities</h3>
+      <p class="pitch">Drainage and flood defences in Lagos, Accra and Freetown are designed against a stationary climate that no longer exists. Non-stationary extreme value analysis, with global temperature as the covariate, turns projected rainfall extremes into the IDF curves and climate-adjustment factors engineers can drop straight into design codes.</p>
+      <div class="meta">
+        <div><b>30 months</b>duration</div>
+        <div><b>$75k</b>budget</div>
+        <div><b>Lagos · Accra · Freetown</b>study area</div>
+        <div><b>Met services · drainage authorities · engineering bodies</b>partners</div>
+      </div>
+      <ul>
+        <li><b>Method core:</b> GEV with location and scale varying with global mean temperature; shape held constant for stability, fully non-stationary form exploratory only.</li>
+        <li><b>Models:</b> CORDEX-Africa ensemble behind a pre-registered validation gate, CMIP6 fallback ladder if too few models pass.</li>
+        <li><b>Deliverable that matters:</b> updated IDF curves and design tables with uncertainty, co-designed with practising engineers from month 1.</li>
+      </ul>
+      <a class="plink" href="https://github.com/moseskolleh/climateproject1/blob/main/proposals/01-extreme-rainfall-design-standards.md">Read the full proposal →</a>
+    </article>
+
+    <article class="project">
+      <div class="top"><span class="pnum">PROJECT 2</span><span class="tag evolved">Evolved</span></div>
+      <h3>From Maps to Warnings: Landslide Early Warning for Freetown</h3>
+      <p class="pitch">The 2017 Regent landslide killed over 1,100 people — and people cannot evacuate a susceptibility map. This project couples bias-corrected ensemble susceptibility mapping with rainfall intensity–duration thresholds into a prototype warning system, trialled in shadow mode through a full rainy season with Sierra Leone's National Disaster Management Agency.</p>
+      <div class="meta">
+        <div><b>42 months</b>duration</div>
+        <div><b>$135k</b>budget</div>
+        <div><b>Freetown Peninsula</b>study area</div>
+        <div><b>NDMA · SL Met Agency · Njala University</b>partners</div>
+      </div>
+      <ul>
+        <li><b>Method core:</b> spatial point-process sampling-bias correction proven on synthetic data first, then RF/XGBoost/MaxEnt ensemble with blocked cross-validation.</li>
+        <li><b>The evolution:</b> the previous project treated warnings as an optional add-on; here the warning system is the deliverable and the map is an input.</li>
+        <li><b>Field programme:</b> two dry-season campaigns, 80–100 power-analysis-sized validation sites, backup study area if access fails.</li>
+      </ul>
+      <a class="plink" href="https://github.com/moseskolleh/climateproject1/blob/main/proposals/02-landslide-early-warning.md">Read the full proposal →</a>
+    </article>
+
+    <article class="project">
+      <div class="top"><span class="pnum">PROJECT 3</span><span class="tag new">New</span></div>
+      <h3>Do AI Weather Models Work for West Africa?</h3>
+      <p class="pitch">AI models now run operationally at major forecast centres, but their headline scores are dominated by mid-latitude verification. Nobody has systematically tested them against the West African monsoon — the mesoscale-convection regime where they are most likely to fail while still scoring well globally. This project builds that benchmark, adds generative km-scale downscaling, and tests lightweight regional fine-tuning.</p>
+      <div class="meta">
+        <div><b>36 months</b>duration</div>
+        <div><b>$110k</b>budget</div>
+        <div><b>West African monsoon region</b>study area</div>
+        <div><b>ACMAD · WASCAL · ECMWF (data) · met services</b>partners</div>
+      </div>
+      <ul>
+        <li><b>Deliverable that matters:</b> WAM-Bench, an open monsoon-specific verification suite — the durable contribution in a fast-moving field.</li>
+        <li><b>Why it replaced classical downscaling:</b> same regional need at 36 not 48 months, ~$110k not $140k, GPU credits instead of an institutional-HPC gate.</li>
+        <li><b>Honesty built in:</b> pre-registered success criteria; a negative fine-tuning result is a publishable, operationally important answer.</li>
+      </ul>
+      <a class="plink" href="https://github.com/moseskolleh/climateproject1/blob/main/proposals/03-ai-downscaling-west-africa.md">Read the full proposal →</a>
+    </article>
+
+    <article class="project">
+      <div class="top"><span class="pnum">PROJECT 4</span><span class="tag new">New</span></div>
+      <h3>Humid Heat &amp; Health in Freetown: an Impact-Based Warning System</h3>
+      <p class="pitch">Freetown appointed Africa's first Chief Heat Officer, yet the city has no heat-warning system and no measurements inside the settlements where humid-heat exposure is worst. A 50-sensor network measures wet-bulb conditions where people actually live, powers neighbourhood-scale forecasts, and feeds a co-designed three-tier alert system piloted through a full hot season.</p>
+      <div class="meta">
+        <div><b>30 months</b>duration</div>
+        <div><b>$90k</b>budget</div>
+        <div><b>Freetown</b>study area</div>
+        <div><b>City Council · Ministry of Health · SL Met Agency</b>partners</div>
+      </div>
+      <ul>
+        <li><b>What was cut and why:</b> satellite LST mapping (cloud-limited, not what humans feel) and hospital-data-dependent epidemiology (access risk) — the sensor network and health partnership were the salvageable core.</li>
+        <li><b>Method core:</b> WBGT/wet-bulb metrics, ERA5-Land bias-corrected to each site, deliberately transparent downscaling the met agency can own.</li>
+        <li><b>Deliverable that matters:</b> a working warning protocol handed to the City Council, with the network left running.</li>
+      </ul>
+      <a class="plink" href="https://github.com/moseskolleh/climateproject1/blob/main/proposals/04-humid-heat-health-warning.md">Read the full proposal →</a>
+    </article>
+
+    <article class="project">
+      <div class="top"><span class="pnum">PROJECT 5</span><span class="tag new">New</span></div>
+      <h3>When Hazards Collide: Compound Coastal Flood Risk</h3>
+      <p class="pitch">The worst urban floods happen when extreme rainfall lands on a city whose drains are already backed up by a high tide — a compound event. The dependence between rainfall extremes and coastal water levels has never been quantified for the Gulf of Guinea. Copula-based joint analysis, sea-level-rise scenarios and reduced-complexity flood modelling produce district-level compound-risk atlases for three megacity coastlines.</p>
+      <div class="meta">
+        <div><b>36 months</b>duration</div>
+        <div><b>$105k</b>budget</div>
+        <div><b>Lagos · Accra · Freetown</b>study area</div>
+        <div><b>Oceanography institutes · met agencies · city planners</b>partners</div>
+      </div>
+      <ul>
+        <li><b>Method core:</b> bivariate copulas on joint rainfall/water-level catalogues, synoptic compositing for mechanism, LISFLOOD-FP-class inundation on FABDEM.</li>
+        <li><b>Portfolio link:</b> consumes Project 1's non-stationary rainfall statistics so both flood drivers evolve consistently under warming.</li>
+        <li><b>Why it replaced the global emulator:</b> a regional user and a live scientific frontier, instead of a global tool with no West African anchor.</li>
+      </ul>
+      <a class="plink" href="https://github.com/moseskolleh/climateproject1/blob/main/proposals/05-compound-coastal-flooding.md">Read the full proposal →</a>
+    </article>
+  </div>
+</section>
+
+<section id="glance">
+  <div class="wrap">
+    <h2>The portfolio at a glance</h2>
+    <p class="sub">Requested budgets are sized to what each project genuinely needs — field campaigns and sensors where measurement is the contribution, GPU credits where compute is, and lean where methods are established.</p>
+
+    <div class="viz-root" id="budget-chart">
+      <div class="ct">Requested budget by project</div>
+      <div class="cs">USD, thousands</div>
+      <div class="tooltip" id="tt"></div>
+      <!-- rows injected by script -->
+      <div id="rows"></div>
+      <div class="viz-note">Hover a bar for duration and study area. Full line-item budgets are in each proposal document.</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Project</th><th>Status</th><th>Duration</th><th>Budget</th><th>Papers targeted</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Rainfall design standards</td><td>Flagship — start here</td><td class="num">30 mo</td><td class="num">$75k</td><td class="num">2–3</td></tr>
+          <tr><td>2</td><td>Landslide early warning</td><td>Evolved</td><td class="num">42 mo</td><td class="num">$135k</td><td class="num">2–3</td></tr>
+          <tr><td>3</td><td>AI models for the monsoon</td><td>New</td><td class="num">36 mo</td><td class="num">$110k</td><td class="num">2–3</td></tr>
+          <tr><td>4</td><td>Humid heat &amp; health</td><td>New</td><td class="num">30 mo</td><td class="num">$90k</td><td class="num">2–3</td></tr>
+          <tr><td>5</td><td>Compound coastal flooding</td><td>New</td><td class="num">36 mo</td><td class="num">$105k</td><td class="num">2–3</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="rethink">
+  <div class="wrap">
+    <h2>What changed in the 2026 rethink</h2>
+    <p class="sub">The previous portfolio was scientifically reviewed twice and patched twice. This redesign rebuilt it instead, keeping only what passed one test: does it change a decision in West Africa?</p>
+    <div class="changes">
+      <div class="change"><div class="h">✅ Kept &amp; sharpened</div><p><b>Extreme-precipitation EVT</b> — the strongest project in every prior review — promoted to flagship with an engineering-first delivery plan.</p></div>
+      <div class="change"><div class="h">🔁 Evolved</div><p><b>Landslide mapping → early warning system.</b> <b>Urban heat mapping → heat-health warnings.</b> In both, the static map was demoted from deliverable to input.</p></div>
+      <div class="change"><div class="h">🆕 Replaced</div><p><b>Classical CMIP6 downscaling</b> (48 mo, $140k, HPC-gated) → AI-model benchmarking &amp; generative downscaling. <b>Global XAI emulator</b> (no regional user) → compound coastal flood risk.</p></div>
+      <div class="change"><div class="h">🗑️ Removed</div><p>Seven overlapping review, comparison and presentation documents — superseded by the proposals themselves and preserved in <a href="https://github.com/moseskolleh/climateproject1/tree/main/archive">archive/</a>.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="funding">
+  <div class="wrap">
+    <h2>Funding targets &amp; open science</h2>
+    <p class="sub">Every project commits to FAIR outputs — data on Zenodo (CC-BY-4.0), code on GitHub (MIT), preprints on EarthArXiv — and operational tools are hosted with regional institutions so they outlive the PhD.</p>
+    <div class="chips">
+      <span class="chip">CREWS</span>
+      <span class="chip">Adaptation Fund</span>
+      <span class="chip">WASCAL Graduate Studies</span>
+      <span class="chip">UKRI international development</span>
+      <span class="chip">NORAD</span>
+      <span class="chip">Wellcome Trust (climate &amp; health)</span>
+      <span class="chip">AfDB ClimDev</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>West Africa Climate Risk Research Agenda · 2026</span>
+    <span>MIT License</span>
+    <a href="https://github.com/moseskolleh/climateproject1">github.com/moseskolleh/climateproject1</a>
+  </div>
+</footer>
+
+<script>
+  const projects = [
+    { label: "1 · Rainfall design standards", budget: 75,  dur: "30 months", area: "Lagos · Accra · Freetown" },
+    { label: "2 · Landslide early warning",   budget: 135, dur: "42 months", area: "Freetown Peninsula" },
+    { label: "3 · AI models for the monsoon", budget: 110, dur: "36 months", area: "West African monsoon region" },
+    { label: "4 · Humid heat & health",       budget: 90,  dur: "30 months", area: "Freetown" },
+    { label: "5 · Compound coastal flooding", budget: 105, dur: "36 months", area: "Lagos · Accra · Freetown" }
+  ];
+  const max = Math.max(...projects.map(p => p.budget));
+  const rows = document.getElementById("rows");
+  const tt = document.getElementById("tt");
+  const chart = document.getElementById("budget-chart");
+
+  projects.forEach(p => {
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = '<div class="lab"></div><div class="track"><div class="bar"></div></div><div class="val">$' + p.budget + 'k</div>';
+    row.querySelector(".lab").textContent = p.label;
+    const bar = row.querySelector(".bar");
+    bar.addEventListener("mousemove", e => {
+      const r = chart.getBoundingClientRect();
+      tt.style.left = (e.clientX - r.left) + "px";
+      tt.style.top  = (e.clientY - r.top) + "px";
+      tt.textContent = p.label + " — $" + p.budget + "k · " + p.dur + " · " + p.area;
+      tt.style.opacity = 1;
+    });
+    bar.addEventListener("mouseleave", () => { tt.style.opacity = 0; });
+    rows.appendChild(row);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      bar.style.width = (p.budget / max * 100) + "%";
+    }));
+  });
+</script>
+</body>
+</html>

@@ -1,210 +1,70 @@
-# Climate Science Research Proposals Repository
+# West Africa Climate Risk Research Agenda
 
-A collection of five comprehensive PhD-level research proposals focused on climate science applications in West Africa, with emphasis on Sierra Leone and the broader West African monsoon region.
+Five PhD-level research proposals that turn climate science into decisions for West African cities — warnings, design standards, forecasts and plans.
 
-## Overview
+**🌍 Website:** https://moseskolleh.github.io/climateproject1/ *(GitHub Pages — see [Enabling the website](#enabling-the-website))*
 
-This repository contains rigorously developed research proposals that address critical climate challenges in West Africa through advanced modeling, machine learning, and statistical approaches. Each proposal has undergone scientific review and revision to ensure methodological soundness, feasibility, and societal impact.
+## The portfolio
 
-**Last Updated:** November 18, 2025
+Every project answers a decision-maker's question, targets a West African user, and defines a minimum viable thesis with explicit decision gates and fallbacks.
 
-## Repository Structure
+| # | Project | One-line pitch | Duration | Budget |
+|---|---------|----------------|----------|--------|
+| 1 | [Climate-Proof Rainfall Design Standards](proposals/01-extreme-rainfall-design-standards.md) | Non-stationary extreme-value statistics turned into the IDF curves and design tables engineers in Lagos, Accra and Freetown actually use | 30 mo | $75k |
+| 2 | [Landslide Early Warning for Freetown](proposals/02-landslide-early-warning.md) | Bias-corrected susceptibility mapping coupled with rainfall thresholds into an operational warning system for Sierra Leone's NDMA | 42 mo | $135k |
+| 3 | [Do AI Weather Models Work for West Africa?](proposals/03-ai-downscaling-west-africa.md) | The first systematic benchmark of AI weather models for the West African monsoon, plus generative km-scale downscaling | 36 mo | $110k |
+| 4 | [Humid Heat & Health in Freetown](proposals/04-humid-heat-health-warning.md) | A 50-sensor humid-heat network powering an impact-based heat-health warning system co-run with Freetown City Council | 30 mo | $90k |
+| 5 | [Compound Coastal Flood Risk](proposals/05-compound-coastal-flooding.md) | First quantification of rainfall × storm-tide dependence for Gulf of Guinea megacities, with sea-level rise and district risk atlases | 36 mo | $105k |
+
+**Recommended starting project: #1** — shortest timeline, lowest budget, established methods with a genuine frontier element, and the clearest path from result to real-world change.
+
+## How the portfolio fits together
+
+The five projects cover the four decision horizons of climate risk with shared data and methods:
+
+- **Decades ahead — build it right:** design standards (P1), compound-flood planning (P5)
+- **Days ahead — warn people:** landslide warnings (P2), heat-health warnings (P4)
+- **The forecast engine underneath:** AI-model skill and downscaling (P3)
+
+P1's non-stationary rainfall statistics feed P5's joint analysis; P2, P3 and P5 share extreme-rainfall event catalogues; P3's forecasts are an experimental input to P2 and P4; P2 and P4 share warning-protocol design with the same national agencies.
+
+## What changed in the rethink
+
+This repository previously held five proposals plus several rounds of review documents. The 2026 redesign rebuilt the portfolio around one test — *does this change a decision in West Africa?* — and around what is scientifically current:
+
+- **Kept and sharpened:** extreme-precipitation EVT (now Project 1, the flagship).
+- **Evolved:** landslide susceptibility mapping became a full early warning system (P2); urban heat island mapping became a humid-heat health warning system (P4) — in both cases the static map was demoted from deliverable to input.
+- **Replaced:** classical CMIP6 statistical downscaling (48 months, $140k, HPC-gated) → AI weather-model evaluation and generative downscaling (P3); the global interpretable climate emulator (no regional user, shaky XAI framing) → compound coastal flood risk (P5).
+- **Removed:** the overlapping review/comparison/presentation documents. They are preserved under [`archive/`](archive/) for provenance.
+
+## Repository structure
 
 ```
-├── IMPROVED_RESEARCH_PROPOSALS.md    # Complete text of all 5 improved proposals
-├── COMPARISON_TABLE.md               # Detailed before/after comparison of improvements
-├── PRIORITIZATION_MATRIX.md          # Multi-criteria analysis for project selection
-├── PRESENTATION_DECK.md              # Executive summary presentation
-├── FUNDING_PROPOSAL_PROJECT4.md      # Full funding application for extreme precipitation project
-└── Based on these reviews...pdf     # Original review document
+├── README.md                  # This file
+├── proposals/                 # The five current proposals (one file each)
+├── docs/                      # GitHub Pages website source
+├── archive/                   # Superseded 2025 proposals and review documents
+└── LICENSE                    # MIT
 ```
 
-## Research Projects
+## Enabling the website
 
-### Project 1: Multi-Model Ensemble Landslide Susceptibility System
-**Location:** Sierra Leone
-**Duration:** 36 months
-**Funding:** $120,000 USD
+The site is a self-contained static page in [`docs/`](docs/). To publish it:
 
-Develops a bias-corrected landslide susceptibility mapping system using hybrid machine learning and physics-based validation. Addresses the critical sampling bias problem in data-sparse regions through spatial point process modeling.
+1. Merge this branch into `main`.
+2. In the repository settings, open **Settings → Pages**.
+3. Under **Build and deployment**, set **Source** to *Deploy from a branch*, choose branch **`main`** and folder **`/docs`**, then save.
 
-**Key Innovation:** Explicit quantification and correction of observational bias using spatial point process models combined with ensemble ML (Random Forest, XGBoost, MaxEnt) and physics-based validation (Factor of Safety).
+GitHub serves it at `https://moseskolleh.github.io/climateproject1/` within a couple of minutes. (Alternatively, the included workflow in `.github/workflows/pages.yml` deploys automatically on every push to `main` if you set the Pages source to *GitHub Actions* instead.)
 
-**Impact:** Operational early warning system for Sierra Leone's National Disaster Management Agency.
+## Funding targets
 
----
+CREWS · Adaptation Fund · WASCAL Graduate Studies Program · UKRI (international development schemes) · NORAD · Wellcome Trust (climate & health, for P4) · African Development Bank ClimDev special fund
 
-### Project 2: Urban Heat Island Analysis with Thermal Downscaling
-**Location:** Freetown, Sierra Leone
-**Duration:** 30 months
-**Funding:** $80,000 USD
+## Open science
 
-Creates high-resolution (30m) urban heat maps from Landsat thermal data using Random Forest thermal sharpening, validated with ground-based temperature sensors and health sector data.
-
-**Key Innovation:** Multi-method validation approach (ground stations + ECOSTRESS satellite + hospital data) tailored for tropical cloud-prone environments.
-
-**Impact:** Heat-health vulnerability mapping and cooling intervention prioritization for Freetown City Council.
-
----
-
-### Project 3: Non-Stationary Precipitation Downscaling for West African Monsoon
-**Location:** West Africa Regional
-**Duration:** 42 months
-**Funding:** $100,000 USD
-
-Develops a 5km daily precipitation product using Random Forest with time-varying predictors and Quantile Delta Mapping bias correction, explicitly testing for non-stationarity in predictor-precipitation relationships.
-
-**Key Innovation:** Rigorous stationarity testing protocol with training/testing split (1981-2000 vs. 2001-2023) and bias trend analysis for climate change applications.
-
-**Impact:** High-resolution climate data for agriculture, hydrology, and disaster risk models across West Africa.
-
----
-
-### Project 4: Non-Stationary Extreme Value Analysis of Precipitation
-**Location:** Lagos, Accra, Freetown (Urban Centers)
-**Duration:** 30 months
-**Funding:** $70,000 USD
-
-Projects changes in extreme precipitation return levels (50-year, 100-year events) using non-stationary Generalized Extreme Value (GEV) distributions with all three parameters varying as functions of global mean surface temperature.
-
-**Key Innovation:** All three GEV parameters (location, scale, shape) modeled as functions of GMST, with CORDEX-Africa validation gate and engineering-ready design tables.
-
-**Impact:** Climate-informed infrastructure design standards for West African coastal megacities.
-
----
-
-### Project 5: Interpretable Spatial Climate Model Emulator
-**Location:** Global with Regional Downscaling
-**Duration:** 40 months
-**Funding:** $90,000 USD
-
-Builds a neural network emulator of Earth System Models that is interpretable (via SHAP analysis) and spatially-aware (using Convolutional Autoencoders), enabling rapid exploration of 10,000+ climate scenarios.
-
-**Key Innovation:** Physical validation through explainable AI (SHAP) to verify logarithmic CO₂ forcing and physics-based constraints, with multi-variable emulation respecting Clausius-Clapeyron relationships.
-
-**Impact:** Interactive "Climate Futures Explorer" web tool for rapid scenario testing and policy analysis.
-
-## Key Features of Improved Proposals
-
-### Scientific Rigor
-- Multi-method validation strategies (statistical + physical + field + cross-dataset)
-- Explicit uncertainty quantification with confidence intervals
-- Specific sample sizes and data tiers with quality flags
-- Risk mitigation strategies and fallback plans
-
-### Methodological Innovation
-- Novel approaches that advance beyond state-of-the-art
-- Physics-informed machine learning with interpretability
-- Non-stationary methods appropriate for climate change analysis
-- Ensemble approaches to reduce model dependency
-
-### Feasibility
-- Realistic timelines (30-42 months) with buffer periods
-- Detailed budgets with line-item justification
-- Computational resource planning (laptop to HPC)
-- Overlap strategies for efficient workflow
-
-### Societal Impact
-- Specific stakeholder partnerships (government agencies, city councils, hospitals)
-- Operational products (dashboards, web tools, design tables)
-- Capacity building through workshops and training
-- Open science commitments (Zenodo DOI, GitHub repositories)
-
-## Comparison with Original Versions
-
-The improved proposals address major gaps identified in peer review:
-
-| Aspect | Original | Improved |
-|--------|----------|----------|
-| Duration | 24-36 months (optimistic) | 30-42 months (realistic with buffer) |
-| Data Specificity | Vague descriptions | Sample sizes (n=300-800 landslides, 30-50 clear-sky scenes) |
-| Validation | Single metric | Multi-method (4-5 independent approaches) |
-| Uncertainty | Not quantified | Explicit sources with confidence intervals |
-| Field Work | Not mentioned | Budgeted campaigns ($5k-10k) with partnerships |
-| Publications | Generic mentions | 3-5 targeted papers with journal strategies |
-
-See [COMPARISON_TABLE.md](COMPARISON_TABLE.md) for detailed analysis.
-
-## Project Selection Guidance
-
-The [PRIORITIZATION_MATRIX.md](PRIORITIZATION_MATRIX.md) provides a comprehensive multi-criteria analysis across 8 dimensions:
-
-1. **Scientific Merit** - Innovation and advancement beyond state-of-the-art
-2. **Feasibility** - Data availability, technical requirements, timeline realism
-3. **Societal Impact** - Stakeholder demand, operational potential
-4. **Cost-Effectiveness** - Budget requirements and value proposition
-5. **Publication Potential** - Journal targets and career advancement
-6. **Skill Development** - Technical competencies gained
-7. **Regional Relevance** - Addressing West African climate priorities
-8. **Scalability** - Transferability to other regions
-
-**Top Recommendation:** Project 4 (Extreme Precipitation) scores highest for immediate impact, feasibility, and PhD completion within timeline.
-
-## Funding Resources
-
-### Full Funding Proposal Available
-A complete funding application for Project 4 is available in [FUNDING_PROPOSAL_PROJECT4.md](FUNDING_PROPOSAL_PROJECT4.md), including:
-- Executive summary
-- Detailed methodology
-- Budget justification (equipment, travel, field work, publication costs)
-- Timeline with Gantt chart
-- Risk assessment
-- Stakeholder engagement plan
-- Expected deliverables
-
-This template can be adapted for other projects.
-
-### Target Funding Sources
-- Climate Risk and Early Warning Systems (CREWS)
-- Adaptation Fund
-- African Climate Research for Development (ACReDev)
-- WASCAL Graduate Studies Program
-- UK Research and Innovation (UKRI) Global Challenges Research Fund
-- Norwegian Agency for Development Cooperation (NORAD)
-
-## Usage and Citation
-
-These proposals are shared for educational and research planning purposes. If you use or adapt these proposals, please:
-
-1. Acknowledge the source repository
-2. Cite relevant methodological papers referenced within
-3. Adapt to your specific context rather than direct copying
-4. Ensure compliance with your institution's research ethics requirements
-
-## Data and Code Availability
-
-Upon project implementation, all outputs will follow FAIR principles:
-
-- **Datasets:** Published to Zenodo with DOI and CC-BY-4.0 license
-- **Code:** GitHub repositories with MIT license
-- **Publications:** Preprints on EarthArXiv, targeting open-access journals
-- **Tools:** Web applications deployed with user documentation
-
-## Contributing
-
-This is a research planning repository. For questions or collaboration inquiries, please open an issue.
+All projects commit to FAIR outputs: datasets on Zenodo (CC-BY-4.0), code on GitHub (MIT), preprints on EarthArXiv, and operational tools hosted with regional institutions (ACMAD/WASCAL) for sustainability beyond the PhD.
 
 ## License
 
-Licensed under the MIT License - see [LICENSE](LICENSE) for details.
-
-## Acknowledgments
-
-These proposals were developed with input from:
-- Sierra Leone Meteorological Agency
-- West African Science Service Centre on Climate Change and Adapted Land Use (WASCAL)
-- African Centre of Meteorological Application for Development (ACMAD)
-- National Disaster Management Agencies of Sierra Leone, Nigeria, and Ghana
-- Regional climate modeling community
-
----
-
-## Quick Links
-
-- [Complete Proposals](IMPROVED_RESEARCH_PROPOSALS.md)
-- [Comparison Analysis](COMPARISON_TABLE.md)
-- [Prioritization Matrix](PRIORITIZATION_MATRIX.md)
-- [Presentation Deck](PRESENTATION_DECK.md)
-- [Project 4 Funding Proposal](FUNDING_PROPOSAL_PROJECT4.md)
-
-**Repository maintained for academic research planning and methodology development.**
+MIT — see [LICENSE](LICENSE).
