@@ -2,7 +2,7 @@
 
 Five PhD-level research proposals that turn climate science into decisions for West African cities — warnings, design standards, forecasts and plans.
 
-**🌍 Website:** https://moseskolleh.github.io/climateproject1/ *(GitHub Pages — see [Enabling the website](#enabling-the-website))*
+**🌍 Website:**[ https://moseskolleh.github.io/climateproject1/](https://moseskolleh.github.io/climateProject1/) *(GitHub Pages — see [Enabling the website](#enabling-the-website))*
 
 ## The portfolio
 
